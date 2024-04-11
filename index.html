@@ -1,72 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Appointment Scheduler</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="container mt-5">
-      <h1 class="mb-4">Appointment Scheduler</h1>
-      <form id="appointmentForm">
-        <div class="mb-3">
-          <label for="clientName" class="form-label">Client Name</label>
-          <input type="text" class="form-control" id="clientName" required />
-        </div>
-        <div class="mb-3">
-          <label for="date" class="form-label">Date</label>
-          <input type="date" class="form-control" id="date" required />
-        </div>
-        <div class="mb-3">
-          <label for="time" class="form-label">Time</label>
-          <input type="time" class="form-control" id="time" required />
-        </div>
-        <div class="mb-3">
-          <label for="purpose" class="form-label">Purpose</label>
-          <textarea
-            class="form-control"
-            id="purpose"
-            rows="3"
-            required
-          ></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">
-          Schedule Appointment
-        </button>
-      </form>
-
-      <div id="appointments" class="mt-5">
-        <!-- Appointments will be displayed here -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appointment Scheduler</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container mt-5">
+    <div id="slides">
+      <div class="slide" id="slide1">
+        <h1>Welcome to Appointment Scheduler</h1>
+        <p>This app helps you manage your appointments.</p>
       </div>
-      
-      <!-- A button to open the popup form -->
-<button class="open-button" onclick="edit()">Edit</button>
-
-<!-- The form -->
-<div class="form-popup" id="myForm">
-  <form action="http://localhost:5000/" class="form-container">
-    <h1>Appointment Schedule</h1>
-
-    <label for="clientName"><b>clientName</b></label>
-    <input type="text" placeholder="Enter clientName" name="clientName" required>
-
-    <label for="date"><b>Date</b></label>
-    <input type="date" placeholder="Enter Date" name="date" required>
-
-    <label for="time"><b>Time</b></label>
-    <input type="time" placeholder="Enter Time" name="time" required>
-
-    <button type="Reschedule" class="btn">Reschedule</button>
-    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-  </form>
-</div>
-              
+      <div class="slide" id="slide2">
+        <h1>How to use</h1>
+        <ol>
+          <li>Fill out the form with client name, date, time, and purpose.</li>
+          <li>Click "Schedule Appointment" to add the appointment.</li>
+          <li>To reschedule, click on the "Edit" button.</li>
+        </ol>
+      </div>
     </div>
-    <script src="index.js"></script>
-  </body>
+    
+    <div class="mt-5">
+      <button onclick="prevSlide()" class="btn btn-primary me-2">Previous</button>
+      <button onclick="nextSlide()" class="btn btn-primary">Next</button>
+    </div>
+
+    <!-- Form for scheduling appointments -->
+    <form id="appointmentForm" class="mt-5">
+      <div class="mb-3">
+        <label for="clientName" class="form-label">Client Name</label>
+        <input type="text" class="form-control" id="clientName" required />
+      </div>
+      <div class="mb-3">
+        <label for="date" class="form-label">Date</label>
+        <input type="date" class="form-control" id="date" required />
+      </div>
+      <div class="mb-3">
+        <label for="time" class="form-label">Time</label>
+        <input type="time" class="form-control" id="time" required />
+      </div>
+      <div class="mb-3">
+        <label for="purpose" class="form-label">Purpose</label>
+        <textarea class="form-control" id="purpose" rows="3" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Schedule Appointment</button>
+    </form>
+
+    <div id="appointments" class="mt-5">
+      <!-- Appointments will be displayed here -->
+    </div>
+
+    
+
+
+
+<!-- Add the Reschedule button in the form -->
+<button type="submit" class="btn btn-primary"> edit</button>
+</button>
+
+
+    <!-- The form for editing appointments -->
+    <div class="form-popup" id="myForm">
+      <form action="http://localhost:5000/" class="form-container">
+        <h1>Appointment Schedule</h1>
+        <label for="clientName"><b>Client Name</b></label>
+        <input type="text" placeholder="Enter Client Name" name="clientName" required>
+        <label for="date"><b>Date</b></label>
+        <input type="date" placeholder="Enter Date" name="date" required>
+        <label for="time"><b>Time</b></label>
+        <input type="time" placeholder="Enter Time" name="time" required>
+        <button type="Reschedule" class="btn">Reschedule</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
 </html>

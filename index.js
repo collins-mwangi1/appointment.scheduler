@@ -17,7 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
               <p><strong>Date:</strong> ${appointment.date}</p>
               <p><strong>Time:</strong> ${appointment.time}</p>
               <p><strong>Purpose:</strong> ${appointment.purpose}</p>
-              <button class="btn btn-danger me-2" onclick="deleteAppointment('${appointment.id}')">Delete</button>`;
+              <button class="btn btn-danger me-2" onclick="deleteAppointment('${appointment.id}')">Delete</button> .
+              <button class="btn btn-primary" onclick="editAppointment('${appointment.id}')">Edit</button>`;
+              
           appointmentsContainer.appendChild(appointmentElement);
         });
       });
@@ -56,16 +58,56 @@ function closeForm() {
     }
   }
 
-  // Function to edit an appointment
-  function editAppointment(id) {
-    editingId = id;
-    document.getElementById("clientName").value = id;
-    document.getElementById("date").value = id;
-    document.getElementById("time").value = id;
-    document.getElementById("purpose").value = id;
-  }
 
-  // Function to cancel editing an appointment
+  // Function to edit an appointment
+function editAppointment(id) {
+  editingId = id;
+  // Fetch the appointment details from the server
+  fetch(`http://localhost:3000/appointments/${id}`)
+    .then(response => response.json())
+    .then(appointment => {
+      // Populate the form fields with appointment details
+      document.getElementById("clientName").value = appointment.clientName;
+      document.getElementById("date").value = appointment.date;
+      document.getElementById("time").value = appointment.time;
+      document.getElementById("purpose").value = appointment.purpose;
+    })
+    .catch(error => console.error('Error fetching appointment details:', error));
+
+  openForm(); // Open the form for editing
+  function openForm() {
+    document.getElementById("editForm").style.display = "block";
+  }
+  
+  // Function to close the popup form
+  function closeForm() {
+    document.getElementById("editForm").style.display = "none";
+  }
+}
+
+
+
+function editAppointment(id) {
+  editingId = id;
+  // Fetch the appointment details from the server
+  fetch(`http://localhost:3000/appointments/${id}`)
+    .then(response => response.json())
+    .then(appointment => {
+      // Populate the form fields with appointment details
+      document.getElementById("clientName").value = appointment.clientName;
+      document.getElementById("date").value = appointment.date;
+      document.getElementById("time").value = appointment.time;
+      document.getElementById("purpose").value = appointment.purpose;
+    })
+    .catch(error => console.error('Error fetching appointment details:', error));
+
+  openForm(); // Open the form for editing
+}
+
+
+
+
+
 
   // Function to handle form submission
   form.addEventListener("submit", function (e) {
